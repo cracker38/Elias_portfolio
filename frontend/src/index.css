@@ -163,6 +163,173 @@ textarea {
 .stage {
   min-width: 0;
   background: var(--stage);
+  position: relative;
+  isolation: isolate;
+  --mx: 50%;
+  --my: 30%;
+}
+
+.stage > main,
+.stage > #main,
+.stage main {
+  position: relative;
+  z-index: 1;
+}
+
+.dev-aura {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.dev-wallpaper {
+  margin: 0;
+  padding: 48px 32px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 2.1;
+  color: #2c98f0;
+  white-space: pre-wrap;
+  opacity: 0;
+  transform: scale(1.01);
+  -webkit-mask-image: radial-gradient(240px circle at var(--mx) var(--my), #000 0%, transparent 72%);
+  mask-image: radial-gradient(240px circle at var(--mx) var(--my), #000 0%, transparent 72%);
+  transition: opacity 0.25s ease;
+}
+
+.dev-aura.is-on .dev-wallpaper {
+  opacity: 0.22;
+}
+
+.dev-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transition: opacity 0.2s ease;
+}
+
+.dev-glyph {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(44, 152, 240, 0.28);
+  border-radius: 999px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(44, 152, 240, 0.12);
+}
+
+.dev-terminal {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: min(420px, 70vw);
+  background: #111827;
+  color: #dbeafe;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(17, 24, 39, 0.28);
+  border: 1px solid #1f2937;
+}
+
+.dev-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #0b1220;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  color: #93c5fd;
+}
+
+.dev-terminal-bar span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4b5563;
+}
+
+.dev-terminal-bar span:nth-child(1) { background: #f87171; }
+.dev-terminal-bar span:nth-child(2) { background: #fbbf24; }
+.dev-terminal-bar span:nth-child(3) { background: #34d399; }
+
+.dev-terminal-bar em {
+  margin-left: 8px;
+  font-style: normal;
+}
+
+.dev-terminal code {
+  display: block;
+  padding: 12px 14px 14px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  min-height: 3.2em;
+}
+
+.dev-terminal .caret {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  margin-left: 2px;
+  background: #60a5fa;
+  vertical-align: text-bottom;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.work-item,
+.plain-card,
+.form-card {
+  position: relative;
+}
+
+.work-item::before {
+  content: './' attr(data-file) '.js';
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.plain-card::before,
+.form-card::before {
+  content: '// inspect';
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.work-item:hover::before,
+.plain-card:hover::before,
+.form-card:hover::before {
+  opacity: 1;
+  transform: none;
 }
 
 .hero-panel {
@@ -676,6 +843,10 @@ textarea {
   .meta-grid {
     grid-template-columns: 1fr;
   }
+
+  .dev-cursor {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -695,5 +866,9 @@ textarea {
   .avatar:hover,
   .hero-photo:hover img {
     transform: none;
+  }
+
+  .dev-aura {
+    display: none;
   }
 }
