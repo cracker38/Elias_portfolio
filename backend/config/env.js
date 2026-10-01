@@ -18,7 +18,7 @@ export const env = {
   clientOrigin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
   jwtSecret: required('JWT_SECRET', 'dev-only-change-me'),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || '8h',
-  adminEmail: required('ADMIN_EMAIL', 'admin@localhost'),
+  adminEmail: required('ADMIN_EMAIL', 'admin@example.com'),
   adminPassword: required('ADMIN_PASSWORD', 'ChangeThisPassword123!'),
   sqlitePath: process.env.SQLITE_PATH || path.join(__dirname, '..', 'data', 'portfolio.db'),
   githubUsername: process.env.GITHUB_USERNAME || 'cracker38',

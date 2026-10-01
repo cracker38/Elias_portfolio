@@ -42,7 +42,7 @@ export async function getGithubProfile() {
       followers: user.followers,
       avatarUrl: user.avatar_url,
       repos: (Array.isArray(repos) ? repos : [])
-        .filter((repo) => !repo.fork)
+        .filter((repo) => !repo.fork && repo.name !== user.login && repo.name !== 'Elias_portfolio')
         .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
         .slice(0, 8)
         .map((repo) => ({

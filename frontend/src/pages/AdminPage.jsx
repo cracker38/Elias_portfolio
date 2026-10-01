@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/useAuth.jsx';
 import { api } from '../services/api';
 
 const tabs = ['Projects', 'Skills', 'Experience', 'Education', 'Certifications', 'Messages'];
