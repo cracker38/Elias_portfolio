@@ -17,7 +17,7 @@ export function ProjectDetailPage() {
 
   if (error) {
     return (
-      <main className="container" style={{ padding: '48px 0' }}>
+      <main className="block">
         <p className="alert error">{error}</p>
         <Link to="/">Back to work</Link>
       </main>
@@ -26,7 +26,7 @@ export function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <main className="container" style={{ padding: '48px 0' }}>
+      <main className="block">
         <p>Loading project…</p>
       </main>
     );
@@ -42,8 +42,8 @@ export function ProjectDetailPage() {
   ];
 
   return (
-    <main>
-      <div className="container project-hero">
+    <main className="block">
+      <div className="project-hero">
         <Link to="/#projects">← Projects</Link>
         <p className="kicker">Project</p>
         <h1>{project.title}</h1>

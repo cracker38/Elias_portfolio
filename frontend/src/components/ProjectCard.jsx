@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export function ProjectCard({ project, featured = false, index = 0 }) {
   return (
-    <article className={`work-item lift ${featured ? 'is-featured' : ''}`} data-file={project.slug}>
+    <article className={`work-item ${featured ? 'is-featured' : ''}`}>
       <span className="work-index">{String(index + 1).padStart(2, '0')}</span>
       <div>
         <h3>{project.title}</h3>
