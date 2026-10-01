@@ -1,16 +1,9 @@
-export function Section({ id, kicker, title, children, action }) {
+export function Section({ id, kicker, title, children }) {
   return (
-    <section id={id} className="section">
-      <div className="container">
-        <div className="section-head">
-          <div>
-            {kicker ? <p className="kicker">{kicker}</p> : null}
-            <h2>{title}</h2>
-          </div>
-          {action}
-        </div>
-        {children}
-      </div>
+    <section id={id} className="block">
+      <p className="kicker">{kicker}</p>
+      <h2>{title}</h2>
+      {children}
     </section>
   );
 }

@@ -2,12 +2,12 @@ import { site } from '../data/site';
 
 export function ResumePage({ data }) {
   return (
-    <main className="container" style={{ padding: '48px 0 80px' }}>
-      <p className="eyebrow">Curriculum vitae</p>
+    <main className="block">
+        <p className="kicker">Curriculum vitae</p>
       <h1>{site.name}</h1>
       <p className="lede">{site.positioning}</p>
-      <div className="hero-actions">
-        <button className="btn btn-primary" type="button" onClick={() => window.print()}>
+      <div className="hero-actions" style={{ marginBottom: 24 }}>
+        <button className="btn" type="button" onClick={() => window.print()}>
           Save / print CV
         </button>
       </div>

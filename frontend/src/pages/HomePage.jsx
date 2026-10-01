@@ -1,74 +1,79 @@
+import { useState } from 'react';
 import { site as fallback } from '../data/site';
 import { Section } from '../components/Section';
 import { ProjectCard } from '../components/ProjectCard';
 import { SkillGrid } from '../components/SkillGrid';
-import { SocialLinks } from '../components/SocialLinks';
 import { ContactForm } from '../components/ContactForm';
 
 export function HomePage({ data }) {
   const site = { ...fallback, ...data.site };
+  const titles = site.specializations;
+  const [slide, setSlide] = useState(0);
+  const current = titles[slide] || site.title;
   const featured = data.projects.filter((project) => project.featured);
   const rest = data.projects.filter((project) => !project.featured);
+  const projects = [...featured, ...rest];
+
+  function prev() {
+    setSlide((value) => (value === 0 ? titles.length - 1 : value - 1));
+  }
+
+  function next() {
+    setSlide((value) => (value === titles.length - 1 ? 0 : value + 1));
+  }
 
   return (
     <main id="main">
-      <section id="home" className="hero">
-        <div className="container fade-up">
-          <p className="eyebrow">{site.specializations.join(' • ')}</p>
-          <h1>{site.headline}</h1>
-          <p className="lede">{site.lede}</p>
-          <p>
-            <strong>{site.name}</strong> · {site.title}
-          </p>
-          <div className="hero-actions">
-            <a className="btn btn-primary" href="#projects">
-              View My Work
-            </a>
-            <a className="btn btn-ghost" href="#contact">
-              Contact Me
-            </a>
-          </div>
-          <SocialLinks github={site.github || site.publicGithub} linkedin={site.linkedin} />
+      <section id="home" className="hero-panel">
+        <div className="hero-copy">
+          <h1>
+            <span>I am</span>
+            <span>a</span>
+            <em>{current}</em>
+          </h1>
+          <p className="hero-sub">{site.lede}</p>
+          <a className="btn-outline" href="#projects">
+            View Portfolio
+          </a>
+        </div>
+        <div className="hero-photo">
+          <img src={site.avatar} alt="" />
+        </div>
+        <div className="hero-arrows">
+          <button type="button" aria-label="Previous title" onClick={prev}>
+            ←
+          </button>
+          <button type="button" aria-label="Next title" onClick={next}>
+            →
+          </button>
         </div>
       </section>
 
-      <Section id="about" kicker="01" title="Professional introduction">
-        <div className="grid-2">
-          <div>
-            {fallback.about.map((paragraph) => (
-              <p className="lede" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <div className="card">
-            <p className="kicker">Developer focus</p>
-            <ul>
-              <li>Full-stack web systems with React and Node.js</li>
-              <li>Applied AI and machine learning in domain-specific products</li>
-              <li>Security-aware application design</li>
-              <li>Deployable software with inspectable source</li>
-            </ul>
-          </div>
-        </div>
+      <Section id="about" kicker="About" title="Who I am">
+        {fallback.about.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+        <ul className="about-points">
+          <li>Full-stack web systems with React and Node.js</li>
+          <li>Applied AI and machine learning in domain-specific products</li>
+          <li>Security-aware application design</li>
+          <li>Deployable software with inspectable source</li>
+        </ul>
       </Section>
 
-      <Section id="skills" kicker="02" title="Technical skills">
+      <Section id="skills" kicker="Skills" title="Technical skills">
         <SkillGrid skills={data.skills} />
       </Section>
 
-      <Section id="projects" kicker="03" title="Featured projects">
-        <div className="projects-grid">
-          {featured.map((project) => (
-            <ProjectCard key={project.id} project={project} featured />
-          ))}
-          {rest.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+      <Section id="projects" kicker="Work" title="Projects">
+        <div className="project-list">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} featured={index === 0} index={index} />
           ))}
         </div>
       </Section>
 
-      <Section id="experience" kicker="04" title="Experience">
+      <Section id="experience" kicker="Experience" title="Experience">
         {data.experience.length ? (
           <div className="timeline">
             {data.experience.map((item) => (
@@ -89,15 +94,14 @@ export function HomePage({ data }) {
             ))}
           </div>
         ) : (
-          <div className="empty-state">
-            No formal employment entries are listed. Technical work is documented through the
-            projects and GitHub repositories on this site. Additional roles can be added from the
-            admin dashboard when they are verified.
-          </div>
+          <p className="empty-state">
+            No formal employment is listed. Projects and GitHub repositories are the primary record of
+            technical work.
+          </p>
         )}
       </Section>
 
-      <Section id="education" kicker="05" title="Education">
+      <Section id="education" kicker="Education" title="Education">
         <div className="timeline">
           {data.education.map((item) => (
             <article className="timeline-item" key={item.id}>
@@ -105,7 +109,7 @@ export function HomePage({ data }) {
                 <div className="faint">{item.period}</div>
                 <span className="chip">{item.status}</span>
               </div>
-              <div className="card">
+              <div>
                 <h3>{item.program}</h3>
                 <p>{item.institution}</p>
                 <p className="muted">{item.details}</p>
@@ -115,62 +119,66 @@ export function HomePage({ data }) {
         </div>
       </Section>
 
-      <Section id="certifications" kicker="06" title="Certifications">
-        <div className="certs-grid">
+      <Section id="certifications" kicker="Certifications" title="Certifications">
+        <div className="card-grid">
           {data.certifications.map((item) => (
-            <article className="cert-card" key={item.id}>
+            <article className="plain-card" key={item.id}>
+              <p className="kicker">{item.issuer}</p>
               <h3>{item.name}</h3>
-              <p>{item.issuer}</p>
-              {item.issued_on ? <p className="faint">{item.issued_on}</p> : <p className="faint">Date available in admin records</p>}
-              {item.credential ? <p className="muted">{item.credential}</p> : null}
+              {item.issued_on ? <p className="faint">{item.issued_on}</p> : null}
             </article>
           ))}
         </div>
       </Section>
 
-      <Section id="github" kicker="07" title="GitHub">
+      <Section id="github" kicker="GitHub" title="Public repositories">
         {data.github?.available ? (
-          <>
-            <p className="muted">
-              Public profile @{data.github.username} · {data.github.publicRepos} repositories ·{' '}
-              {data.github.followers} followers
-            </p>
-            <div className="github-grid">
-              {data.github.repos.map((repo) => (
-                <a className="card" key={repo.name} href={repo.url} target="_blank" rel="noreferrer">
-                  <h3>{repo.name}</h3>
-                  <p className="muted">{repo.description || 'No description provided on GitHub.'}</p>
-                  <p className="faint">
-                    {repo.language || 'Language n/a'} · {repo.stars} stars
-                  </p>
-                </a>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="empty-state">
-            Live GitHub data is unavailable right now.{' '}
-            <a href={site.github} target="_blank" rel="noreferrer">
-              View repositories on GitHub
-            </a>
-            .
+          <div className="card-grid">
+            {data.github.repos.map((repo) => (
+              <a className="plain-card" key={repo.name} href={repo.url} target="_blank" rel="noreferrer">
+                <h3>{repo.name}</h3>
+                <p className="muted">{repo.description || 'Repository on GitHub.'}</p>
+                <p className="faint">{repo.language || 'Source'}</p>
+              </a>
+            ))}
           </div>
+        ) : (
+          <p className="empty-state">
+            <a href={site.github} target="_blank" rel="noreferrer">
+              View GitHub profile
+            </a>
+          </p>
         )}
       </Section>
 
-      <Section id="contact" kicker="08" title="Contact">
-        <div className="grid-2">
+      <Section id="contact" kicker="Contact" title="Get in touch">
+        <div className="split">
           <div>
-            <p className="lede">
+            <p>
               For collaboration, technical review, or project discussion, send a message. Submissions
-              are stored by the Node.js API and reviewed from the admin dashboard.
+              go to the Node.js API and are reviewed privately.
             </p>
-            {site.email ? <p>Email: {site.email}</p> : null}
-            <SocialLinks github={site.github} linkedin={site.linkedin} />
+            <p>
+              <a href={site.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              {site.linkedin ? (
+                <>
+                  {' · '}
+                  <a href={site.linkedin} target="_blank" rel="noreferrer">
+                    LinkedIn
+                  </a>
+                </>
+              ) : null}
+            </p>
           </div>
           <ContactForm />
         </div>
       </Section>
+
+      <footer className="page-foot">
+        © {new Date().getFullYear()} {site.name} · Software Developer
+      </footer>
     </main>
   );
 }

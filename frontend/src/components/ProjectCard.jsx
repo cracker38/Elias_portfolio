@@ -1,28 +1,21 @@
 import { Link } from 'react-router-dom';
 
-export function ProjectCard({ project, featured = false }) {
+export function ProjectCard({ project, featured = false, index = 0 }) {
   return (
-    <article className={`project-card ${featured ? 'featured' : ''}`}>
-      <p className="kicker">{featured ? 'Featured' : 'Project'}</p>
-      <h3>{project.title}</h3>
-      <p className="muted">{project.summary}</p>
-      {project.problem ? (
-        <p>
-          <strong>Problem. </strong>
-          {project.problem}
-        </p>
-      ) : null}
-      <div className="chip-row">
-        {(project.technologies || []).slice(0, 6).map((tech) => (
-          <span className="chip" key={tech}>
-            {tech}
-          </span>
-        ))}
+    <article className={`work-item ${featured ? 'is-featured' : ''}`}>
+      <span className="work-index">{String(index + 1).padStart(2, '0')}</span>
+      <div>
+        <h3>{project.title}</h3>
+        <p>{project.summary}</p>
+        <div className="chip-row">
+          {(project.technologies || []).slice(0, 5).map((tech) => (
+            <span className="chip" key={tech}>
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
-      {Array.isArray(project.features) && project.features.length ? (
-        <p className="muted">{project.features.slice(0, 3).join(' · ')}</p>
-      ) : null}
-      <div className="inline-links" style={{ marginTop: 'auto' }}>
+      <div className="work-links">
         <Link to={`/projects/${project.slug}`}>Details</Link>
         {project.github_url ? (
           <a href={project.github_url} target="_blank" rel="noreferrer">
@@ -31,7 +24,7 @@ export function ProjectCard({ project, featured = false }) {
         ) : null}
         {project.live_url ? (
           <a href={project.live_url} target="_blank" rel="noreferrer">
-            Live demo
+            Live
           </a>
         ) : null}
       </div>

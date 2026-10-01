@@ -1,14 +1,17 @@
 export const site = {
   name: 'Elias Dukuzumuremyi',
+  firstName: 'Elias',
   shortName: 'ED',
   title: 'Software Developer',
+  location: 'RP Musanze College',
   positioning: 'Software Developer building intelligent, secure, and scalable digital solutions.',
-  headline: 'Building Intelligent, Secure and Scalable Software.',
+  headline: 'I am a Software Developer',
   lede:
     'I design and develop software systems that combine modern web technologies, artificial intelligence, machine learning, and cybersecurity to solve practical problems.',
-  specializations: ['AI', 'Machine Learning', 'Cybersecurity', 'Full-Stack Development'],
+  specializations: ['Software Developer', 'AI & Machine Learning', 'Cybersecurity', 'Full-Stack Development'],
   github: 'https://github.com/cracker38',
   githubUsername: 'cracker38',
+  avatar: 'https://avatars.githubusercontent.com/u/197528144?v=4',
   linkedin: '',
   email: '',
   about: [

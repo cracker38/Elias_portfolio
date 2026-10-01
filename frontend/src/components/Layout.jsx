@@ -1,21 +1,22 @@
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Navbar } from './Navbar';
-import { Footer } from './Footer';
+import { Sidebar } from './Sidebar';
 
-export function Layout({ theme, onToggleTheme, site }) {
+export function Layout({ site }) {
+  useEffect(() => {
+    document.documentElement.removeAttribute('data-theme');
+    document.documentElement.style.colorScheme = 'light';
+  }, []);
+
   return (
-    <>
+    <div className="shell">
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Navbar
-        theme={theme}
-        onToggleTheme={onToggleTheme}
-        github={site.github}
-        linkedin={site.linkedin}
-      />
-      <Outlet />
-      <Footer github={site.github} linkedin={site.linkedin} />
-    </>
+      <Sidebar github={site.github} linkedin={site.linkedin} />
+      <div className="stage">
+        <Outlet />
+      </div>
+    </div>
   );
 }

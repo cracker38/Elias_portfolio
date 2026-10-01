@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './hooks/useAuth.jsx';
 import { usePortfolio } from './hooks/usePortfolio';
-import { useTheme } from './hooks/useTheme';
 import { Layout } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 
@@ -13,11 +12,10 @@ const AdminLoginPage = lazy(() => import('./pages/AdminLoginPage').then((m) => (
 
 function AppRoutes() {
   const data = usePortfolio();
-  const { theme, toggle } = useTheme();
 
   return (
     <Routes>
-      <Route element={<Layout theme={theme} onToggleTheme={toggle} site={data.site} />}>
+      <Route element={<Layout site={data.site} />}>
         <Route path="/" element={<HomePage data={data} />} />
         <Route
           path="/projects/:slug"

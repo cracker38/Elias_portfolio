@@ -11,8 +11,8 @@ export function Navbar({ theme, onToggleTheme, github, linkedin }) {
     <header className="nav">
       <div className="container nav-inner">
         <Link className="brand" to="/" aria-label={`${site.name} home`}>
-          <span className="brand-mark">{site.shortName}</span>
-          <span>Elias Dukuzumuremyi</span>
+          <span className="brand-mark">ED</span>
+          Elias
         </Link>
         <nav className="nav-links" aria-label="Primary">
           {navItems.map((item) => (
@@ -33,10 +33,10 @@ export function Navbar({ theme, onToggleTheme, github, linkedin }) {
             </a>
           ) : null}
           <Link className="btn btn-ghost hide-sm" to="/resume">
-            Download CV
+            CV
           </Link>
           <button className="icon-btn" type="button" onClick={onToggleTheme} aria-label="Toggle color theme">
-            {theme === 'dark' ? 'Aa' : 'A'}
+            {theme === 'dark' ? '☀' : '☾'}
           </button>
           <button
             className="menu-btn"

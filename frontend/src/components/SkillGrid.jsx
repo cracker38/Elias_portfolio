@@ -17,16 +17,15 @@ export function SkillGrid({ skills }) {
     .filter((group) => group.items.length);
 
   return (
-    <div className="skills-wrap">
+    <div className="skill-table">
       {grouped.map((group) => (
-        <div className="skill-card" key={group.category}>
+        <div className="skill-row" key={group.category}>
           <h3>{group.category}</h3>
           <div className="skill-list">
             {group.items.map((skill) => (
-              <div className="skill-pill" key={skill.id}>
+              <span className="skill-tag" key={skill.id}>
                 {skill.name}
-                <span>{skill.proficiency}</span>
-              </div>
+              </span>
             ))}
           </div>
         </div>

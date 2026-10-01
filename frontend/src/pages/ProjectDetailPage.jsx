@@ -45,9 +45,9 @@ export function ProjectDetailPage() {
     <main>
       <div className="container project-hero">
         <Link to="/#projects">← Projects</Link>
-        <p className="eyebrow">Project</p>
+        <p className="kicker">Project</p>
         <h1>{project.title}</h1>
-        <p className="lede">{project.summary}</p>
+        <p className="hero-sub">{project.summary}</p>
         <div className="inline-links">
           {project.github_url ? (
             <a href={project.github_url} target="_blank" rel="noreferrer">
@@ -63,7 +63,7 @@ export function ProjectDetailPage() {
           )}
         </div>
       </div>
-      <div className="container detail-grid" style={{ paddingBottom: 64 }}>
+      <div className="detail-grid">
         <div>
           {blocks.map(([title, body]) =>
             body ? (
@@ -83,7 +83,7 @@ export function ProjectDetailPage() {
           </section>
         </div>
         <aside>
-          <div className="card">
+          <div className="plain-card">
             <h2>Technologies</h2>
             <div className="chip-row">
               {(project.technologies || []).map((tech) => (
