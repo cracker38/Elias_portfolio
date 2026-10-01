@@ -3,7 +3,9 @@ export const site = {
   firstName: 'Elias',
   shortName: 'ED',
   title: 'Software Developer',
-  location: 'RP Musanze College',
+  location: 'Kirehe District, Rwanda',
+  email: 'it.elias38@gmail.com',
+  phone: '+250 785 354 935',
   positioning: 'Software Developer building intelligent, secure, and scalable digital solutions.',
   headline: 'I am a Software Developer',
   lede:
@@ -13,7 +15,6 @@ export const site = {
   githubUsername: 'cracker38',
   avatar: 'https://avatars.githubusercontent.com/u/197528144?v=4',
   linkedin: '',
-  email: '',
   about: [
     'Elias Dukuzumuremyi is a software developer focused on designing, building, and maintaining practical digital systems.',
     'He is studying Information and Communication Technology at RP Musanze College while building full-stack applications that incorporate AI, machine learning, and security-aware engineering.',

@@ -6,6 +6,7 @@ import { projectModel } from '../models/projectModel.js';
 import { skillModel } from '../models/skillModel.js';
 import { educationModel } from '../models/educationModel.js';
 import { certificationModel } from '../models/certificationModel.js';
+import { experienceModel } from '../models/experienceModel.js';
 
 const projects = [
   {
@@ -315,12 +316,94 @@ export async function seedIfEmpty() {
       sort_order: 1,
     });
     certificationModel.create({
-      name: 'Ethical Hacker',
-      issuer: 'Cisco Networking Academy',
-      issued_on: '',
-      credential: 'Update credential ID in the admin dashboard if available.',
+      name: 'JavaScript Certification',
+      issuer: 'freeCodeCamp',
+      issued_on: 'July 2024',
+      credential: '',
       url: '',
       sort_order: 2,
+    });
+  }
+
+  refreshFromCv();
+}
+
+function refreshFromCv() {
+  if (db.prepare('SELECT COUNT(*) AS count FROM experiences').get().count === 0) {
+    experienceModel.create({
+      role: 'Intern – Mobile Application Development',
+      organization: 'KLab, Kacyiru, Kigali',
+      period: 'Sept 2024 – Oct 2024',
+      responsibilities: [
+        'Participated in mobile app development projects.',
+        'Collaborated with teams to design and implement software solutions.',
+        'Worked with Flutter and UI/UX design practices.',
+      ],
+      technologies: ['Flutter', 'UI/UX'],
+      sort_order: 1,
+    });
+    experienceModel.create({
+      role: 'Intern – Computer Maintenance',
+      organization: 'Business Development Fund (BDF), Kirehe, Rwanda',
+      period: 'July 2019',
+      responsibilities: [
+        'Performed troubleshooting and maintenance of computer systems.',
+        'Assisted in system configuration and hardware support.',
+      ],
+      technologies: ['IT Support', 'Hardware'],
+      sort_order: 2,
+    });
+  }
+
+  if (db.prepare('SELECT COUNT(*) AS count FROM education').get().count < 3) {
+    db.prepare('DELETE FROM education').run();
+    educationModel.create({
+      program: "Bachelor's Degree in Information and Communication Technology",
+      institution: 'RP Musanze College, Rwanda',
+      period: '2026 – 2027',
+      status: 'Ongoing',
+      details: 'Undergraduate ICT program focused on software systems and digital technologies.',
+      sort_order: 1,
+    });
+    educationModel.create({
+      program: 'A1 in Information Technology',
+      institution: 'IPRC Tumba College, Rwanda',
+      period: '2022 – 2025',
+      status: 'Completed',
+      details: 'Information Technology diploma covering software, systems, and applied computing.',
+      sort_order: 2,
+    });
+    educationModel.create({
+      program: 'Advanced Level Certificate in Networking',
+      institution: 'Lycee du Lac Muhazi (ASPEJ), Rwanda',
+      period: '2018 – 2021',
+      status: 'Completed',
+      details: 'Advanced-level networking studies.',
+      sort_order: 3,
+    });
+  }
+
+  if (db.prepare('SELECT COUNT(*) AS count FROM certifications').get().count < 6) {
+    db.prepare('DELETE FROM certifications').run();
+    const certs = [
+      ['Ethical Hacker', 'Cisco Networking Academy', '18 Feb 2026'],
+      ['Introduction to Cybersecurity', 'Cisco Networking Academy', '31 Dec 2025'],
+      ['Advanced Level Certificate in Networking', 'NESA', ''],
+      ['Junior Cybersecurity Analyst Career Path Exam', 'Career path exam', ''],
+      ['AI Literacy Certification', 'Certification', ''],
+      ['Master Generative AI Certification', 'Certification', ''],
+      ['Web Design Certification', 'freeCodeCamp', 'June 2024'],
+      ['JavaScript Certification', 'freeCodeCamp', 'July 2024'],
+    ];
+    certs.forEach((item, index) => {
+      certificationModel.create({
+        name: item[0],
+        issuer: item[1],
+        issued_on: item[2],
+        credential: '',
+        url: '',
+        sort_order: index + 1,
+      });
     });
   }
 }

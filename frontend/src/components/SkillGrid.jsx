@@ -23,7 +23,7 @@ export function SkillGrid({ skills }) {
           <h3>{group.category}</h3>
           <div className="skill-list">
             {group.items.map((skill) => (
-              <span className="skill-tag" key={skill.id}>
+              <span className="skill-tag lift" key={skill.id}>
                 {skill.name}
               </span>
             ))}

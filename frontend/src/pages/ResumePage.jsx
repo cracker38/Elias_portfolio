@@ -1,57 +1,70 @@
 import { site } from '../data/site';
+import { cv } from '../data/cv';
 
 export function ResumePage({ data }) {
+  const education = data.education?.length >= 3 ? data.education : cv.education;
+  const certifications = data.certifications?.length >= 4 ? data.certifications : cv.certifications;
+  const experience = data.experience?.length ? data.experience : cv.experience;
+
   return (
     <main className="block">
-        <p className="kicker">Curriculum vitae</p>
+      <p className="kicker">Curriculum vitae</p>
       <h1>{site.name}</h1>
-      <p className="lede">{site.positioning}</p>
+      <p className="hero-sub">{cv.objective}</p>
       <div className="hero-actions" style={{ marginBottom: 24 }}>
-        <button className="btn" type="button" onClick={() => window.print()}>
-          Save / print CV
+        <a className="btn lift" href={cv.cvFile} download>
+          Download PDF
+        </a>
+        <button className="btn-outline lift" type="button" onClick={() => window.print()}>
+          Print
         </button>
       </div>
+      <p>
+        {cv.email} · {cv.phone}
+        <br />
+        {cv.location}
+      </p>
 
-      <section className="section">
-        <h2>Focus</h2>
-        <p>{site.lede}</p>
+      <section>
+        <h2>Experience</h2>
+        {experience.map((item) => (
+          <p key={item.id}>
+            <strong>{item.role}</strong>, {item.organization} · {item.period}
+          </p>
+        ))}
       </section>
 
-      <section className="section">
+      <section>
         <h2>Education</h2>
-        {data.education.map((item) => (
+        {education.map((item) => (
           <p key={item.id}>
             <strong>{item.program}</strong>, {item.institution} · {item.period} ({item.status})
           </p>
         ))}
       </section>
 
-      <section className="section">
+      <section>
         <h2>Selected projects</h2>
         {data.projects
           .filter((project) => project.featured)
           .map((project) => (
             <p key={project.id}>
-              <strong>{project.title}.</strong> {project.summary}{' '}
-              {project.github_url ? (
-                <a href={project.github_url} target="_blank" rel="noreferrer">
-                  Repository
-                </a>
-              ) : null}
+              <strong>{project.title}.</strong> {project.summary}
             </p>
           ))}
       </section>
 
-      <section className="section">
+      <section>
         <h2>Skills</h2>
         <p>{data.skills.map((skill) => skill.name).join(' · ')}</p>
       </section>
 
-      <section className="section">
+      <section>
         <h2>Certifications</h2>
-        {data.certifications.map((item) => (
+        {certifications.map((item) => (
           <p key={item.id}>
             {item.name} — {item.issuer}
+            {item.issued_on ? ` (${item.issued_on})` : ''}
           </p>
         ))}
       </section>

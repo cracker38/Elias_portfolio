@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { navItems, site } from '../data/site';
+import { cv } from '../data/cv';
 
 export function Sidebar({ github, linkedin }) {
   const [open, setOpen] = useState(false);
@@ -27,10 +28,10 @@ export function Sidebar({ github, linkedin }) {
       </button>
       <aside className={`sidebar ${open ? 'open' : ''}`}>
         <div className="sidebar-profile">
-          <img className="avatar" src={site.avatar} alt={`${site.name} portrait`} width="140" height="140" />
+          <img className="avatar lift-media" src={site.avatar} alt={`${site.name} portrait`} width="140" height="140" />
           <h2 className="sidebar-name">{site.name}</h2>
           <p className="sidebar-role">{site.title}</p>
-          <p className="sidebar-place">{site.location}</p>
+          <p className="sidebar-place">{cv.location}</p>
         </div>
         <nav className="sidebar-nav" aria-label="Primary">
           {navItems.map((item) => {
@@ -49,6 +50,7 @@ export function Sidebar({ github, linkedin }) {
           })}
         </nav>
         <div className="sidebar-foot">
+          <a href={`mailto:${cv.email}`}>Email</a>
           {github ? (
             <a href={github} target="_blank" rel="noreferrer">
               GitHub
@@ -59,8 +61,11 @@ export function Sidebar({ github, linkedin }) {
               LinkedIn
             </a>
           ) : null}
-          <Link to="/resume" onClick={() => setOpen(false)}>
+          <a href={cv.cvFile} download>
             Download CV
+          </a>
+          <Link to="/resume" onClick={() => setOpen(false)}>
+            Online CV
           </Link>
         </div>
       </aside>
