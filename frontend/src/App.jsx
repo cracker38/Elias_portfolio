@@ -29,7 +29,7 @@ function AppRoutes() {
           path="/resume"
           element={
             <Suspense fallback={<p className="container">Loading…</p>}>
-              <ResumePage data={data} />
+              <ResumePage />
             </Suspense>
           }
         />

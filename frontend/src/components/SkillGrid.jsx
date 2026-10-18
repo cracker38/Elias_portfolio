@@ -1,15 +1,6 @@
-const order = [
-  'Programming',
-  'Frontend',
-  'Backend',
-  'Databases',
-  'AI / Machine Learning',
-  'Cybersecurity',
-  'Tools',
-];
-
 export function SkillGrid({ skills }) {
-  const grouped = order
+  const categories = [...new Set(skills.map((skill) => skill.category).filter(Boolean))];
+  const grouped = categories
     .map((category) => ({
       category,
       items: skills.filter((skill) => skill.category === category),

@@ -6,19 +6,19 @@ export const site = {
   location: 'Kirehe District, Rwanda',
   email: 'it.elias38@gmail.com',
   phone: '+250 785 354 935',
-  positioning: 'Software Developer building intelligent, secure, and scalable digital solutions.',
-  headline: 'I am a Software Developer',
+  positioning: 'Software Developer building web, mobile, AI-powered, and security-focused solutions.',
+  headline: 'I am a Software Developer and Full-Stack Developer',
   lede:
-    'I design and develop software systems that combine modern web technologies, artificial intelligence, machine learning, and cybersecurity to solve practical problems.',
-  specializations: ['Software Developer', 'AI & Machine Learning', 'Cybersecurity', 'Full-Stack Development'],
+    'I build web and mobile applications, AI-powered tools, and secure software systems to solve practical problems.',
+  specializations: ['Software Developer', 'Full-Stack Development', 'Mobile Application Development', 'Cybersecurity'],
   github: 'https://github.com/cracker38',
   githubUsername: 'cracker38',
   avatar: 'https://avatars.githubusercontent.com/u/197528144?v=4',
   linkedin: '',
   about: [
-    'Elias Dukuzumuremyi is a software developer focused on designing, building, and maintaining practical digital systems.',
-    'He is studying Information and Communication Technology at RP Musanze College while building full-stack applications that incorporate AI, machine learning, and security-aware engineering.',
-    'The work shown here comes from public repositories and deployed demos. Claims are limited to systems that exist and can be inspected.',
+    'Elias Dukuzumuremyi is a software developer with experience in web and mobile application development, IT support, and systems administration.',
+    'His work includes an AI-powered mental health support assistant, a farmer field management mobile application, and contributions to web projects.',
+    'His technical skills include full-stack development, databases, networking, cybersecurity, and application security.',
   ],
 };
 

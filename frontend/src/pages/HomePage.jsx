@@ -15,9 +15,9 @@ export function HomePage({ data }) {
   const featured = data.projects.filter((project) => project.featured);
   const rest = data.projects.filter((project) => !project.featured);
   const projects = [...featured, ...rest];
-  const experience = data.experience?.length ? data.experience : cv.experience;
-  const education = data.education?.length >= 3 ? data.education : cv.education;
-  const certifications = data.certifications?.length >= 4 ? data.certifications : cv.certifications;
+  const experience = cv.experience;
+  const education = cv.education;
+  const certifications = cv.certifications;
 
   return (
     <main id="main">
@@ -58,10 +58,10 @@ export function HomePage({ data }) {
       <Section id="about" kicker="About" title="Who I am">
         <p className="lead">{cv.objective}</p>
         <ul className="about-points">
-          <li>Full-stack web systems with React, Node.js, PHP, and REST APIs</li>
+          <li>Full-stack development with React.js, Node.js, PHP, Python, and REST APIs</li>
           <li>Mobile development with Flutter</li>
-          <li>AI-powered applications and applied machine learning</li>
-          <li>Cybersecurity and application security in the delivery cycle</li>
+          <li>Cybersecurity, ethical hacking, and application security</li>
+          <li>IT support, troubleshooting, and systems administration</li>
         </ul>
         <div className="meta-grid">
           <article className="plain-card">
@@ -88,7 +88,7 @@ export function HomePage({ data }) {
       </Section>
 
       <Section id="skills" kicker="Skills" title="Technical skills">
-        <SkillGrid skills={data.skills} />
+        <SkillGrid skills={cv.skills} />
       </Section>
 
       <Section id="projects" kicker="Work" title="Projects">
@@ -136,12 +136,12 @@ export function HomePage({ data }) {
             <article className="timeline-item" key={item.id}>
               <div>
                 <div className="faint">{item.period}</div>
-                <span className="chip">{item.status}</span>
+                {item.status ? <span className="chip">{item.status}</span> : null}
               </div>
               <div>
                 <h3>{item.program}</h3>
                 <p>{item.institution}</p>
-                <p className="muted">{item.details}</p>
+                {item.details ? <p className="muted">{item.details}</p> : null}
               </div>
             </article>
           ))}
@@ -152,7 +152,7 @@ export function HomePage({ data }) {
         <div className="card-grid">
           {certifications.map((item) => (
             <article className="plain-card" key={item.id}>
-              <p className="kicker">{item.issuer}</p>
+              {item.issuer ? <p className="kicker">{item.issuer}</p> : null}
               <h3>{item.name}</h3>
               {item.issued_on ? <p className="faint">{item.issued_on}</p> : null}
             </article>
