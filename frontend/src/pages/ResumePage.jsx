@@ -9,49 +9,30 @@ function CvSection({ title, children }) {
   );
 }
 
-function CvEntry({ period, organization, title, children }) {
-  return (
-    <article className="cv-entry">
-      <div className="cv-period">{period}</div>
-      <div>
-        {organization ? <p className="cv-organization">{organization}</p> : null}
-        {title ? <h3>{title}</h3> : null}
-        {children}
-      </div>
-    </article>
-  );
-}
-
 export function ResumePage() {
   const skillCategories = [...new Set(cv.skills.map((skill) => skill.category))];
 
   return (
     <main id="main" className="block resume-page">
-      <article className="cv-sheet">
-        <header className="cv-header">
-          <div>
-            <p className="cv-eyebrow">Curriculum Vitae</p>
-            <h1>{cv.name}</h1>
-            <p className="cv-role">{cv.title}</p>
-          </div>
-          <div className="cv-actions hero-actions">
-            <a className="btn lift" href={cv.cvFile} download>
-              Download PDF
-            </a>
-            <button className="btn-outline lift" type="button" onClick={() => window.print()}>
-              Print
-            </button>
-          </div>
-        </header>
+      <div className="cv-toolbar">
+        <a className="btn lift" href={cv.cvFile} download>
+          Download PDF
+        </a>
+        <button className="btn-outline lift" type="button" onClick={() => window.print()}>
+          Print
+        </button>
+      </div>
 
+      <article className="cv-sheet">
         <CvSection title="Contact">
-          <p>
-            <a href={`mailto:${cv.email}`}>{cv.email}</a>
-          </p>
+          <h1 className="cv-contact-name">{cv.name}</h1>
+          <p>{cv.location}</p>
           <p>
             <a href={`tel:${cv.phone.replace(/\s/g, '')}`}>{cv.phone}</a>
           </p>
-          <p>{cv.location}</p>
+          <p>
+            <a href={`mailto:${cv.email}`}>{cv.email}</a>
+          </p>
         </CvSection>
 
         <CvSection title="Objective">
@@ -61,13 +42,16 @@ export function ResumePage() {
         <CvSection title="Experience">
           <div className="cv-entry-list">
             {cv.experience.map((item) => (
-              <CvEntry key={item.id} period={item.period} organization={item.organization} title={item.role}>
+              <article className="cv-entry" key={item.id}>
+                <p className="cv-period">{item.period}</p>
+                <h3>{item.role}</h3>
+                <p className="cv-organization">{item.organization}</p>
                 <ul className="cv-list">
                   {item.responsibilities.map((responsibility) => (
                     <li key={responsibility}>{responsibility}</li>
                   ))}
                 </ul>
-              </CvEntry>
+              </article>
             ))}
           </div>
         </CvSection>
@@ -75,12 +59,12 @@ export function ResumePage() {
         <CvSection title="Education">
           <div className="cv-entry-list">
             {cv.education.map((item) => (
-              <CvEntry
-                key={item.id}
-                period={item.period}
-                organization={item.institution}
-                title={item.status ? `${item.program} (${item.status})` : item.program}
-              />
+              <article className="cv-entry cv-education-entry" key={item.id}>
+                <p className="cv-education-heading">
+                  <strong>{item.period}</strong> - {item.institution}
+                </p>
+                <p>{item.program}</p>
+              </article>
             ))}
           </div>
         </CvSection>
@@ -120,10 +104,6 @@ export function ResumePage() {
       </article>
 
       <article className="cv-sheet cv-sheet-continuation">
-        <header className="cv-continuation-header">
-          <p>{cv.name}</p>
-        </header>
-
         <CvSection title="Achievements & Awards">
           <ul className="cv-list">
             {cv.certifications.map((item) => (
@@ -136,13 +116,20 @@ export function ResumePage() {
           </ul>
         </CvSection>
 
-        <CvSection title="Interests">
-          <ul className="cv-list">
-            {cv.interests.map((interest) => (
-              <li key={interest}>{interest}</li>
-            ))}
-          </ul>
-        </CvSection>
+        {cv.interests.length > 0 ? (
+          <CvSection title="Interests">
+            <div className="cv-interest-list">
+              {cv.interests.map((interest) => (
+                <p key={interest.name}>
+                  <span className={interest.marker === '•' ? 'cv-big-dot' : undefined} aria-hidden="true">
+                    {interest.marker}
+                  </span>{' '}
+                  {interest.name}
+                </p>
+              ))}
+            </div>
+          </CvSection>
+        ) : null}
 
         <CvSection title="Languages">
           <ul className="cv-list">
@@ -158,8 +145,7 @@ export function ResumePage() {
           <div className="cv-reference-list">
             {cv.references.map((reference) => (
               <article className="cv-reference" key={reference.name}>
-                <h3>{reference.name}</h3>
-                <p>{reference.organization}</p>
+                <h3>{reference.name} - {reference.organization}</h3>
                 <p>{reference.role}</p>
                 <p>
                   <a href={`tel:${reference.phone.replace(/\s/g, '')}`}>{reference.phone}</a>

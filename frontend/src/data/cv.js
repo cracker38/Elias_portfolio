@@ -1,9 +1,5 @@
 const skillGroups = [
   {
-    category: 'Full-Stack Development',
-    names: ['React.js', 'Node.js', 'JavaScript', 'PHP', 'Python', 'REST APIs', 'HTML/CSS', 'Bootstrap'],
-  },
-  {
     category: 'Mobile Development',
     names: ['Flutter', 'Mobile application development'],
   },
@@ -31,8 +27,16 @@ const skillGroups = [
     names: ['Windows Server', 'Linux Server'],
   },
   {
-    category: 'Professional Skills',
-    names: ['Leadership', 'Project Management', 'Problem Solving', 'Business & Innovation'],
+    category: '. UI/UX & Web Design',
+    names: ['Web design exposure', 'HTML/CSS', 'Bootstrap'],
+  },
+  {
+    category: '. Front-End',
+    names: ['React.js', 'JavaScript', 'Responsive web fundamentals'],
+  },
+  {
+    category: '. Professional Skills',
+    names: ['Teamwork', 'Communication', 'Project management', 'Creative problem-solving'],
   },
 ];
 
@@ -44,14 +48,13 @@ const links = [
 
 export const cv = {
   name: 'DUKUZUMUREMYI Elias',
-  title: 'Software Developer and Full-Stack Developer',
   location: 'Eastern Province, Kirehe District, Mahama Sector, Rwanda',
   phone: '+250 785 354 935',
   email: 'it.elias38@gmail.com',
   github: 'https://github.com/cracker38',
   cvFile: '/Elias_DUKUZUMUREMYI_CV.pdf',
   objective:
-    'Software Developer and Full-Stack Developer with practical experience in web and mobile application development, frontend and backend programming, databases, APIs, AI-powered applications, and application security. Skilled in React.js, Node.js, JavaScript, PHP, Python, Flutter, HTML/CSS, Bootstrap, MySQL, MongoDB, and Oracle. Experienced in building practical digital solutions, troubleshooting systems, collaborating on software projects, and applying cybersecurity principles throughout the development lifecycle. Strong problem-solving, project technology innovation skills and project management.',
+    'ICT student and application developer with practical exposure to mobile application development, web design, and user-facing digital solutions. Familiar with Flutter, React.js, JavaScript, HTML/CSS, and Bootstrap. Interested in user-centered design, intuitive responsive interfaces, teamwork, and creative problem-solving.',
   experience: [
     {
       id: 'klab',
@@ -68,7 +71,7 @@ export const cv = {
       id: 'bdf',
       role: 'Intern – Computer Maintenance',
       organization: 'Business Development Fund (BDF), Kirehe, Rwanda',
-      period: 'July 2019',
+      period: 'July 2019 -',
       responsibilities: [
         'Performed troubleshooting and maintenance of computer systems.',
         'Assisted in system configuration and hardware support.',
@@ -78,24 +81,21 @@ export const cv = {
   education: [
     {
       id: 'musanze',
-      program: "Bachelor's Degree in Information and Communication Technology",
+      program: "Bachelor's Degree in Information and Communication Technology (Ongoing)",
       institution: 'RP Musanze College, Rwanda',
       period: '2026 - 2027',
-      status: 'Ongoing',
     },
     {
       id: 'tumba',
       program: 'A1 in Information Technology',
       institution: 'IPRC Tumba College, Rwanda',
       period: '2022 - 2025',
-      status: '',
     },
     {
       id: 'aspej',
       program: 'Advanced Level Certificate in Networking',
       institution: 'Lycee du Lac Muhazi (ASPEJ), Rwanda',
       period: '2018 - 2021',
-      status: '',
     },
   ],
   skills: skillGroups.flatMap(({ category, names }) =>
@@ -108,7 +108,7 @@ export const cv = {
   projects: [
     {
       id: 'aimhsa',
-      name: 'AIMHSA – AI Mental Health Support Assistant',
+      name: 'AIMHSA - AI Mental Health Support Assistant',
       description:
         'Developed an AI-powered mental health support platform tailored for Rwanda. Supports Kinyarwanda, English, French, and Kiswahili; provides 24/7 confidential AI chatbot assistance and integrates mental-health resources, crisis support, and professional referrals.',
     },
@@ -141,11 +141,11 @@ export const cv = {
     { name: 'French', level: 'Good' },
   ],
   interests: [
-    'Cybersecurity and network security',
-    'IT infrastructure and systems administration',
-    'Technology research and system development',
-    'Learning cybersecurity tools and security best practices',
-    'Networking and professional growth',
+    { name: 'UI/UX and web design', marker: '.' },
+    { name: 'Mobile application development', marker: '.' },
+    { name: 'Responsive digital interfaces', marker: '.' },
+    { name: 'User-centered digital solutions', marker: '.' },
+    { name: 'Technology research and innovation', marker: '•' },
   ],
   references: [
     {

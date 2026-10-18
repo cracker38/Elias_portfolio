@@ -58,10 +58,10 @@ export function HomePage({ data }) {
       <Section id="about" kicker="About" title="Who I am">
         <p className="lead">{cv.objective}</p>
         <ul className="about-points">
-          <li>Full-stack development with React.js, Node.js, PHP, Python, and REST APIs</li>
-          <li>Mobile development with Flutter</li>
-          <li>Cybersecurity, ethical hacking, and application security</li>
-          <li>IT support, troubleshooting, and systems administration</li>
+          <li>Mobile application development with Flutter</li>
+          <li>Front-end development with React.js, JavaScript, HTML/CSS, and Bootstrap</li>
+          <li>Networking, cybersecurity, and systems administration</li>
+          <li>IT support, troubleshooting, and hardware maintenance</li>
         </ul>
         <div className="meta-grid">
           <article className="plain-card">
